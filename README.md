@@ -1,5 +1,6 @@
 # Library
-This is a simple Spring MVC project that implements CRUD (Create, Read, Update, Delete) operations. It provides a basic web interface to manage a collection of items.
+This is a simple Spring MVC project that implements CRUD (Create, Read, Update, Delete) operations. 
+It provides a basic web interface to manage a collection of items.
 
 ## Prerequisites
 Make sure you have the following installed:
@@ -34,6 +35,7 @@ The application provides a simple web interface with the following CRUD function
 ## Technologies Used
 * Spring MVC - Web framework
 * JDBC template
+* Validation of items
 * MySQL - Relational database management system
 * Maven - Build and dependency management tool
 * Tomcat - Web server
