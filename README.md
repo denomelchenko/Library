@@ -17,6 +17,7 @@ Follow these instructions to get the project up and running on your local machin
 1. Navigate to the project directory by cd `spring-mvc-app`
 1. Configure the database:
    * Create a new MySQL database.
+   * Id must be auto increment.
    * Update database.properties configuration.
 1. Build the project:
    `mvn clean install`
