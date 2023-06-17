@@ -8,8 +8,6 @@ public class Book {
     private final static String NOT_EMPTY_MESSAGE = "Could not be empty";
 
     private int id;
-    @Nullable
-    private Integer userId;
     @NotEmpty(message = NOT_EMPTY_MESSAGE)
     @Size(min = 3, max = 100, message = "Should be between 3 and 100")
     private String title;
@@ -23,14 +21,6 @@ public class Book {
     private int year;
 
     public Book() {
-    }
-
-    public Book(int id, int userId, String title, String author, int year) {
-        this.id = id;
-        this.userId = userId;
-        this.title = title;
-        this.author = author;
-        this.year = year;
     }
 
     public Book(int id, String title, String author, int year) {
@@ -72,11 +62,4 @@ public class Book {
         this.year = year;
     }
 
-    public Integer getUserId() {
-        return userId;
-    }
-
-    public void setUserId(int userId) {
-        this.userId = userId;
-    }
 }

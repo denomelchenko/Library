@@ -1,5 +1,6 @@
 package com.denomelchenko.library.dao;
 
+import com.denomelchenko.library.models.Book;
 import com.denomelchenko.library.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -7,6 +8,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Optional;
 
 @Component
 public class UserDAO {
@@ -31,8 +33,18 @@ public class UserDAO {
                 user.getFullName(), user.getYearOfBirthday());
     }
 
-    public void edit(User user, int id) {
+    public void update(User user, int id) {
         jdbcTemplate.update("UPDATE User SET full_name=?, year_of_birthday=? WHERE id=?",
                 user.getFullName(), user.getYearOfBirthday(), id);
+    }
+
+    public Optional<User> getUserByFullName(String fullName) {
+        return jdbcTemplate.query("SELECT * FROM User WHERE full_name=?",
+                new Object[]{fullName}, new BeanPropertyRowMapper<>(User.class)).stream().findAny();
+    }
+
+    public List<Book> getBooksById(int id) {
+        return jdbcTemplate.query("SELECT * FROM Book WHERE user_id=?",
+                new Object[]{id}, new BeanPropertyRowMapper<>(Book.class));
     }
 }

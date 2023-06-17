@@ -2,33 +2,15 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
-  <title>Create book</title>
+  <title>All books</title>
 </head>
 <body>
-
-<form th:method="POST" th:action="@{/books}" th:object="${book}">
-  <label for="title">Enter title:</label>
-  <input type="text" th:field="*{title}" id="title">
-  <div style="color:red" th:if="${#fields.hasErrors('title')}" th:errors="*{title}">Error</div>
-  <br/>
-
-  <label for="author">Enter author:</label>
-  <input type="text" th:field="*{author}" id="author">
-  <div style="color:red" th:if="${#fields.hasErrors('author')}" th:errors="*{author}">Error</div>
-  <br/>
-
-  <label for="year">Enter year:</label>
-  <input type="text" th:field="*{year}" id="year">
-  <div style="color:red" th:if="${#fields.hasErrors('year')}" th:errors="*{year}">Error</div>
-  <br/>
-
-  <label for="user">User:</label>
-  <select th:object="${book}" th:field="*{userId}" id="user">
-    <option th:each="user : ${users}" th:value="${user.getId()}"
-            th:text="${user.getFullName()}"></option>
-  </select>
-  <br/>
-  <input type="submit" value="Create!">
+<div th:each="book : ${books}">
+  <a th:href="@{/books/{id}(id=${book.getId()})}" th:text="${book.getTitle()}">title</a>
+</div>
+<hr/>
+<form th:method="GET" th:action="@{books/new}">
+  <input type="submit" value="CREATE NEW">
 </form>
 </body>
 </html>

@@ -11,15 +11,25 @@
     <div th:text="${'Year: ' + book.getYear()}"></div>
 </div>
 <hr/>
+<div th:if="${owner}">
+    <span>Book now with: </span>
+    <span th:text="${owner.getFullName()}">Name</span>
+    <form th:method="PATCH" th:action="@{/books/{id}/release(id=${book.getId()})}">
+        <input type="submit" value="RELEASE BOOK">
+    </form>
+</div>
 
-<form th:method="PATCH" th:action="@{/books/{id}/edit_user(id=${book.getId()})}">
-    <label for="user">User:</label>
-    <select th:object="${book}" th:field="*{userId}" id="user">
-        <option th:each="user : ${users}" th:value="${user.getId()}"
-                th:text="${user.getFullName()}"></option>
-    </select>
-    <input type="submit" value="SET USER"/>
-</form>
+<div th:if="${users}">
+    <span>This book without user right now. You can assign it:</span>
+    <form th:method="PATCH" th:action="@{/books/{id}/assign(id=${book.getId()})}">
+        <label for="user">User:</label>
+        <select th:object="${user}" th:field="*{id}" id="user">
+            <option th:each="user : ${users}" th:value="${user.getId()}"
+                    th:text="${user.getFullName()}"></option>
+        </select>
+        <input type="submit" value="SET USER"/>
+    </form>
+</div>
 <hr/>
 <form th:method="GET" th:action="@{/books/{id}/edit(id=${book.getId()})}">
     <input type="submit" value="EDIT">

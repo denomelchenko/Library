@@ -29,6 +29,7 @@ public class UserController {
     @GetMapping("/{id}")
     public String show(@PathVariable("id") int id, Model model) {
         model.addAttribute("user", userDAO.getById(id));
+        model.addAttribute("books", userDAO.getBooksById(id));
         return "users/show";
     }
 
@@ -43,7 +44,7 @@ public class UserController {
                          @PathVariable("id") int id) {
         if (bindingResult.hasErrors())
             return "users/edit";
-        userDAO.edit(user, id);
+        userDAO.update(user, id);
         return "redirect:/users";
     }
 

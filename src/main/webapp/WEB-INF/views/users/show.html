@@ -9,7 +9,18 @@
     <div th:text="${'Full name: ' + user.getFullName()}"></div>
     <div th:text="${'Year of birth: ' + user.getYearOfBirthday()}"></div>
 </div>
+<hr/>
+<div th:if="${books.isEmpty()}">
+    <p>This user without books</p>
 
+</div>
+<div th:if="${!books.isEmpty()}">
+    <div>Books:</div>
+    <ul th:each="book : ${books}">
+        <li th:text="${book.getTitle() + ' ' + book.getAuthor() + ' ' + book.getYear()}"></li>
+    </ul>
+</div>
+<hr/>
 <form th:method="GET" th:action="@{/users/{id}/edit(id=${user.getId()})}">
     <input type="submit" value="EDIT">
 </form>
