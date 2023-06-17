@@ -23,7 +23,9 @@ Follow these instructions to get the project up and running on your local machin
    `mvn clean install`
 1. Run the project:
    `mvn tomcat7:run`
-1. Open your web browser and navigate to http://localhost:8080/people to access the application.
+1. Open your web browser :
+  * Navigate to http://localhost:8080/users to access the users panel.
+  * Navigate to http://localhost:8080/books to access the books panel
 
 ## Usage
 The application provides a simple web interface with the following CRUD functionality:
