@@ -7,7 +7,7 @@
 <body>
 <div>
     <div th:text="${'Full name: ' + user.getFullName()}"></div>
-    <div th:text="${'Year of birth: ' + user.getYearOfBirthday()}"></div>
+    <div th:text="${'Year of birth: ' + user.getYearOfBirth()}"></div>
 </div>
 <hr/>
 <div th:if="${books.isEmpty()}">
@@ -23,6 +23,9 @@
 <hr/>
 <form th:method="GET" th:action="@{/users/{id}/edit(id=${user.getId()})}">
     <input type="submit" value="EDIT">
+</form>
+<form th:method="DELETE" th:action="@{/books/{id}/delete(id=${book.getId()})}">
+    <input type="submit" value="DELETE">
 </form>
 </body>
 </html>

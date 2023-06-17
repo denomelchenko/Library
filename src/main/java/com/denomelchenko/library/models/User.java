@@ -10,15 +10,15 @@ public class User {
     private String fullName;
     @Min(value = 1920, message = "Birth year should be bigger than 1920")
     @Max(value = 2023, message = "Birth year should be less than 2024")
-    private int yearOfBirthday;
+    private int yearOfBirth;
 
     public User() {
     }
 
-    public User(int id, String fullName, int yearOfBirthday) {
+    public User(int id, String fullName, int yearOfBirth) {
         this.id = id;
         this.fullName = fullName;
-        this.yearOfBirthday = yearOfBirthday;
+        this.yearOfBirth = yearOfBirth;
     }
 
     public int getId() {
@@ -37,11 +37,11 @@ public class User {
         this.fullName = fullName;
     }
 
-    public int getYearOfBirthday() {
-        return yearOfBirthday;
+    public int getYearOfBirth() {
+        return yearOfBirth;
     }
 
-    public void setYearOfBirthday(int yearOfBirthday) {
-        this.yearOfBirthday = yearOfBirthday;
+    public void setYearOfBirth(int yearOfBirth) {
+        this.yearOfBirth = yearOfBirth;
     }
 }
