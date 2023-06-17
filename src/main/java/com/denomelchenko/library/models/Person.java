@@ -4,7 +4,6 @@ import javax.validation.constraints.*;
 
 public class Person {
     private int id;
-
     @NotEmpty(message = "Must not be empty")
     @Size(min = 2, max = 35, message = "Name must be between 2 and 30 characters")
     private String name;

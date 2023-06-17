@@ -18,7 +18,8 @@ Follow these instructions to get the project up and running on your local machin
 1. Configure the database:
    * Create a new MySQL database.
    * Id must be auto increment.
-   * Update database.properties configuration.
+   * Rename file database.properties.origin to database.properties configuration.
+   * Update your database.properties file.
 1. Build the project:
    `mvn clean install`
 1. Run the project:
