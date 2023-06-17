@@ -13,8 +13,7 @@ MySQL Server
 ## Getting Started
 Follow these instructions to get the project up and running on your local machine.
 1. Install Java Development Kit (JDK).
-1. Download the repository to your local machine or clone it by `git clone https://github.com/denomelchenko/Spring-MVC-App.git`
-1. Navigate to the project directory by cd `spring-mvc-app`
+1. Download the repository to your local machine or clone it by `git clone https://github.com/denomelchenko/Library.git`
 1. Configure the database:
    * Create a new MySQL database by DB file.
    * Rename file database.properties.origin to database.properties configuration.
