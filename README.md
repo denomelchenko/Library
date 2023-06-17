@@ -16,8 +16,7 @@ Follow these instructions to get the project up and running on your local machin
 1. Download the repository to your local machine or clone it by `git clone https://github.com/denomelchenko/Spring-MVC-App.git`
 1. Navigate to the project directory by cd `spring-mvc-app`
 1. Configure the database:
-   * Create a new MySQL database.
-   * Id must be auto increment.
+   * Create a new MySQL database by DB file.
    * Rename file database.properties.origin to database.properties configuration.
    * Update your database.properties file.
 1. Build the project:
