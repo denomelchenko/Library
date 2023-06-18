@@ -36,6 +36,12 @@ public class UserController {
         return "users/show";
     }
 
+    @DeleteMapping("/{id}")
+    public String delete(@PathVariable("id") int id) {
+        userDAO.delete(id);
+        return "redirect:/users";
+    }
+
     @GetMapping("/{id}/edit")
     public String edit(@PathVariable("id") int id, Model model) {
         model.addAttribute("user", userDAO.getById(id));

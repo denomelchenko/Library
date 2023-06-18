@@ -47,4 +47,8 @@ public class UserDAO {
         return jdbcTemplate.query("SELECT * FROM Book WHERE user_id=?",
                 new Object[]{id}, new BeanPropertyRowMapper<>(Book.class));
     }
+
+    public void delete(int id) {
+        jdbcTemplate.update("DELETE FROM User WHERE id=?", id);
+    }
 }
