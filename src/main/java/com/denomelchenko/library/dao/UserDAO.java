@@ -29,12 +29,12 @@ public class UserDAO {
     }
 
     public void add(User user) {
-        jdbcTemplate.update("INSERT INTO User(full_name, year_of_birthday) VALUES (?, ?)",
+        jdbcTemplate.update("INSERT INTO User(full_name, year_of_birth) VALUES (?, ?)",
                 user.getFullName(), user.getYearOfBirth());
     }
 
     public void update(User user, int id) {
-        jdbcTemplate.update("UPDATE User SET full_name=?, year_of_birthday=? WHERE id=?",
+        jdbcTemplate.update("UPDATE User SET full_name=?, year_of_birth=? WHERE id=?",
                 user.getFullName(), user.getYearOfBirth(), id);
     }
 

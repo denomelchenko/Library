@@ -2,6 +2,7 @@ package com.denomelchenko.library.controllers;
 
 import com.denomelchenko.library.dao.UserDAO;
 import com.denomelchenko.library.models.User;
+import com.denomelchenko.library.util.UserValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,10 +15,12 @@ import javax.validation.Valid;
 @RequestMapping("/users")
 public class UserController {
     private final UserDAO userDAO;
+    private final UserValidator userValidator;
 
     @Autowired
-    public UserController(UserDAO userDAO) {
+    public UserController(UserDAO userDAO, UserValidator userValidator) {
         this.userDAO = userDAO;
+        this.userValidator = userValidator;
     }
 
     @GetMapping()
@@ -42,6 +45,7 @@ public class UserController {
     @PatchMapping("/{id}")
     public String update(@ModelAttribute("user") @Valid User user, BindingResult bindingResult,
                          @PathVariable("id") int id) {
+        userValidator.validate(user, bindingResult);
         if (bindingResult.hasErrors())
             return "users/edit";
         userDAO.update(user, id);
@@ -55,6 +59,7 @@ public class UserController {
 
     @PostMapping()
     public String create(@ModelAttribute("user") @Valid User user, BindingResult bindingResult) {
+        userValidator.validate(user, bindingResult);
         if (bindingResult.hasErrors()) {
             return "users/new";
         }
