@@ -1,7 +1,7 @@
 package com.denomelchenko.library.util;
 
-import com.denomelchenko.library.dao.UserDAO;
 import com.denomelchenko.library.models.User;
+import com.denomelchenko.library.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
@@ -11,11 +11,11 @@ import java.util.Optional;
 
 @Component
 public class UserValidator implements Validator {
-    private final UserDAO userDAO;
+    private final UserService userService;
 
     @Autowired
-    public UserValidator(UserDAO userDAO) {
-        this.userDAO = userDAO;
+    public UserValidator(UserService userService) {
+        this.userService = userService;
     }
 
     @Override
@@ -33,7 +33,7 @@ public class UserValidator implements Validator {
                         !Character.isUpperCase(splits[1].codePointAt(0))) {
                     errors.rejectValue("fullName", "", "Each word should start from capital letter");
                 } else {
-                    Optional<User> optionalUser = userDAO.getUserByFullName(user.getFullName());
+                    Optional<User> optionalUser = userService.findUserByFullName(user.getFullName());
                     if (optionalUser.isPresent() && user.getId() != optionalUser.get().getId()) {
                         errors.rejectValue("fullName", "", "User is already registered");
                     }

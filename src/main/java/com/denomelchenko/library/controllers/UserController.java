@@ -1,7 +1,7 @@
 package com.denomelchenko.library.controllers;
 
-import com.denomelchenko.library.dao.UserDAO;
 import com.denomelchenko.library.models.User;
+import com.denomelchenko.library.services.UserService;
 import com.denomelchenko.library.util.UserValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,37 +14,37 @@ import javax.validation.Valid;
 @Controller
 @RequestMapping("/users")
 public class UserController {
-    private final UserDAO userDAO;
+    private final UserService userService;
     private final UserValidator userValidator;
 
     @Autowired
-    public UserController(UserDAO userDAO, UserValidator userValidator) {
-        this.userDAO = userDAO;
+    public UserController(UserService userService, UserValidator userValidator) {
+        this.userService = userService;
         this.userValidator = userValidator;
     }
 
     @GetMapping()
     public String index(Model model) {
-        model.addAttribute("users", userDAO.getAll());
+        model.addAttribute("users", userService.getAll());
         return "users/index";
     }
 
     @GetMapping("/{id}")
     public String show(@PathVariable("id") int id, Model model) {
-        model.addAttribute("user", userDAO.getById(id));
-        model.addAttribute("books", userDAO.getBooksById(id));
+        model.addAttribute("user", userService.getById(id));
+        model.addAttribute("books", userService.findBooksByUserId(id));
         return "users/show";
     }
 
     @DeleteMapping("/{id}")
     public String delete(@PathVariable("id") int id) {
-        userDAO.delete(id);
+        userService.delete(id);
         return "redirect:/users";
     }
 
     @GetMapping("/{id}/edit")
     public String edit(@PathVariable("id") int id, Model model) {
-        model.addAttribute("user", userDAO.getById(id));
+        model.addAttribute("user", userService.getById(id));
         return "users/edit";
     }
 
@@ -54,7 +54,7 @@ public class UserController {
         userValidator.validate(user, bindingResult);
         if (bindingResult.hasErrors())
             return "users/edit";
-        userDAO.update(user, id);
+        userService.update(id, user);
         return "redirect:/users";
     }
 
@@ -69,7 +69,7 @@ public class UserController {
         if (bindingResult.hasErrors()) {
             return "users/new";
         }
-        userDAO.add(user);
+        userService.add(user);
         return "redirect:/users";
     }
 }
