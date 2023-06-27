@@ -3,6 +3,7 @@ package com.denomelchenko.library.controllers;
 import com.denomelchenko.library.models.User;
 import com.denomelchenko.library.services.UserService;
 import com.denomelchenko.library.util.UserValidator;
+import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

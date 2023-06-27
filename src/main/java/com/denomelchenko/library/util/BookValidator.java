@@ -1,7 +1,7 @@
 package com.denomelchenko.library.util;
 
-import com.denomelchenko.library.dao.BookDAO;
 import com.denomelchenko.library.models.Book;
+import com.denomelchenko.library.services.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
@@ -9,12 +9,6 @@ import org.springframework.validation.Validator;
 
 @Component
 public class BookValidator implements Validator {
-    private final BookDAO bookDAO;
-
-    @Autowired
-    public BookValidator(BookDAO bookDAO) {
-        this.bookDAO = bookDAO;
-    }
 
     @Override
     public boolean supports(Class<?> aClass) {

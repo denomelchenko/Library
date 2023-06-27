@@ -19,6 +19,10 @@
     </form>
 </div>
 
+<div th:if=${empty}>
+    <span th:text="${empty}"></span>
+</div>
+
 <div th:if="${users}">
     <span>This book without user right now. You can assign it:</span>
     <form th:method="PATCH" th:action="@{/books/{id}/assign(id=${book.getId()})}">

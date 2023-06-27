@@ -1,6 +1,5 @@
 package com.denomelchenko.library.controllers;
 
-import com.denomelchenko.library.dao.BookDAO;
 import com.denomelchenko.library.models.Book;
 import com.denomelchenko.library.models.User;
 import com.denomelchenko.library.services.BookService;
@@ -18,14 +17,12 @@ import java.util.Optional;
 @Controller
 @RequestMapping("/books")
 public class BookController {
-    private final BookDAO bookDAO;
     private final BookService bookService;
     private final UserService userService;
     private final BookValidator bookValidator;
 
     @Autowired
-    public BookController(BookDAO bookDAO, BookService bookService, UserService userService, BookValidator bookValidator) {
-        this.bookDAO = bookDAO;
+    public BookController(BookService bookService, UserService userService, BookValidator bookValidator) {
         this.bookService = bookService;
         this.userService = userService;
         this.bookValidator = bookValidator;
@@ -41,11 +38,16 @@ public class BookController {
     public String show(@PathVariable("id") int id, Model model, @ModelAttribute("user") User user) {
         Book book = bookService.getById(id);
         model.addAttribute("book", book);
-        Optional<User> bookOwner = bookDAO.getBookOwner(id);
-        if (bookOwner.isPresent()) {
-            model.addAttribute("owner", bookOwner.get());
+        User bookOwner = bookService.getBookOwner(id);
+        if (bookOwner != null) {
+            model.addAttribute("owner", bookOwner);
         } else {
-            model.addAttribute("users", userService.getAll());
+            Optional<User> users = userService.getAll().stream().findAny();
+            if (users.isPresent()) {
+                model.addAttribute("users", userService.getAll());
+            } else {
+                model.addAttribute("empty", "Library without users");
+            }
         }
         return "books/show";
     }
@@ -92,13 +94,13 @@ public class BookController {
 
     @PatchMapping("{id}/release")
     public String release(@PathVariable("id") int id) {
-        bookDAO.release(id);
+        bookService.release(id);
         return "redirect:/books/" + id;
     }
 
     @PatchMapping("/{id}/assign")
     public String assign(@PathVariable("id") int id, @ModelAttribute("user") User user) {
-        bookDAO.assign(id, user);
+        bookService.assign(id, user);
         return "redirect:/books/" + id;
     }
 }

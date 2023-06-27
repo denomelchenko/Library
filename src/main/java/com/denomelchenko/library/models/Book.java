@@ -31,7 +31,7 @@ public class Book {
     @Max(value = 2023, message = "Year should be less than 2023")
     private int year;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User owner;
 
