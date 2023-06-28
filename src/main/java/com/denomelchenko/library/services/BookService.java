@@ -3,11 +3,9 @@ package com.denomelchenko.library.services;
 import com.denomelchenko.library.models.Book;
 import com.denomelchenko.library.models.User;
 import com.denomelchenko.library.repositories.BookRepository;
-import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -37,8 +35,7 @@ public class BookService {
     }
 
     public List<Book> getAll(boolean sorting) {
-        if (sorting)
-            return bookRepository.findAll(Sort.by("year"));
+        if (sorting) return bookRepository.findAll(Sort.by("year"));
         return bookRepository.findAll();
     }
 
@@ -76,5 +73,9 @@ public class BookService {
     @Transactional
     public void assign(int id, User user) {
         bookRepository.findById(id).ifPresent(book -> book.setOwner(user));
+    }
+
+    public List<Book> findByTitleLike(String title) {
+        return bookRepository.findByTitleContaining(title);
     }
 }

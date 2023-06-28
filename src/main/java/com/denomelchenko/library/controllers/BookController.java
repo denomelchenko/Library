@@ -12,6 +12,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -61,18 +62,31 @@ public class BookController {
         return "books/show";
     }
 
+    @GetMapping("/search")
+    public String search(@ModelAttribute("book") Book book,
+                         @RequestParam(value = "title", required = false) String title,
+                         Model model) {
+        if (title != null) {
+            List<Book> foundBooks = bookService.findByTitleLike(title);
+            if (!foundBooks.isEmpty()) {
+                model.addAttribute("foundBooks", foundBooks);
+            } else {
+                model.addAttribute("empty", "No results were found for the query");
+            }
+        }
+        return "books/search";
+    }
+
     @GetMapping("/new")
-    public String newBook(@ModelAttribute("book") Book book, Model model) {
-        model.addAttribute("users", userService.getAll());
+    public String newBook(@ModelAttribute("book") Book book) {
         return "books/new";
     }
 
     @PostMapping()
     public String create(@ModelAttribute("book") @Valid Book book,
-                         BindingResult bindingResult, Model model) {
+                         BindingResult bindingResult) {
         bookValidator.validate(book, bindingResult);
         if (bindingResult.hasErrors()) {
-            model.addAttribute("users", userService.getAll());
             return "books/new";
         }
         bookService.add(book);

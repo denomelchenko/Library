@@ -17,7 +17,7 @@
 <div th:if="${!books.isEmpty()}">
     <div>Books:</div>
     <ul th:each="book : ${books}">
-        <li th:text="${book.getTitle() + ' ' + book.getAuthor() + ' ' + book.getYear()}"></li>
+        <li th:text="'Title: ' +  ${book.getTitle() + ' Author: ' + book.getAuthor() + ' year of publication ' + book.getYear()}"></li>
     </ul>
 </div>
 <hr/>

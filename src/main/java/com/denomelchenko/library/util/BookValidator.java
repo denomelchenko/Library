@@ -1,8 +1,6 @@
 package com.denomelchenko.library.util;
 
 import com.denomelchenko.library.models.Book;
-import com.denomelchenko.library.services.BookService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
