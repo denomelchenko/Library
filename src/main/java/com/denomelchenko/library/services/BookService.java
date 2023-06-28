@@ -5,6 +5,8 @@ import com.denomelchenko.library.models.User;
 import com.denomelchenko.library.repositories.BookRepository;
 import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,6 +25,20 @@ public class BookService {
     }
 
     public List<Book> getAll() {
+        return bookRepository.findAll();
+    }
+
+    public List<Book> getAll(int page, int itemsPerPage, boolean sorting) {
+        if (sorting) {
+            return bookRepository.findAll(PageRequest.of(page, itemsPerPage, Sort.by("year"))).getContent();
+        } else {
+            return bookRepository.findAll(PageRequest.of(page, itemsPerPage)).getContent();
+        }
+    }
+
+    public List<Book> getAll(boolean sorting) {
+        if (sorting)
+            return bookRepository.findAll(Sort.by("year"));
         return bookRepository.findAll();
     }
 
@@ -48,7 +64,9 @@ public class BookService {
 
     @Transactional
     public void release(int id) {
-        bookRepository.findById(id).ifPresent(book -> {book.setOwner(null);});
+        bookRepository.findById(id).ifPresent(book -> {
+            book.setOwner(null);
+        });
     }
 
     public User getBookOwner(int id) {
