@@ -3,13 +3,13 @@ This is a simple Spring MVC project that implements CRUD (Create, Read, Update, 
 It provides a basic web interface to manage a collection of items.
 
 ## Prerequisites
-Make sure you have the following installed:
+* Make sure you have the following installed:
 
-Java Development Kit (JDK) version 8 or higher
+* Java Development Kit (JDK) version 9 or higher
 
-Apache Maven
+* Apache Maven
 
-MySQL Server
+* MySQL Server
 ## Getting Started
 Follow these instructions to get the project up and running on your local machine.
 1. Install Java Development Kit (JDK).
@@ -36,7 +36,8 @@ The application provides a simple web interface with the following CRUD function
 
 ## Technologies Used
 * Spring MVC - Web framework
-* JDBC template
+* Hibernate
+* Java Persistence API
 * Validation of items
 * MySQL - Relational database management system
 * Maven - Build and dependency management tool
