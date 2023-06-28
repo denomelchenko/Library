@@ -16,17 +16,17 @@ public class Book {
 
     @Column(name = "title")
     @NotEmpty(message = NOT_EMPTY_MESSAGE)
-    @Size(min = 3, max = 100, message = "Should be between 3 and 100")
+    @Size(min = 3, max = 100, message = "Should be between 3 and 100 characters")
     private String title;
 
     @Column(name = "author")
     @NotEmpty(message = NOT_EMPTY_MESSAGE)
-    @Size(min = 5, max = 110, message = "Should be between 5 and 110")
+    @Size(min = 5, max = 100, message = "Should be between 5 and 100 characters")
     private String author;
 
     @Column(name = "year")
     @NotNull(message = NOT_EMPTY_MESSAGE)
-    @Min(value = 1250, message = "Year should be bigger than 1250")
+    @Min(value = 1250, message = "Year should be bigger than 0")
     @Max(value = 2023, message = "Year should be less than 2023")
     private int year;
 
