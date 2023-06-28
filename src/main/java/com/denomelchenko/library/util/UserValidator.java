@@ -28,7 +28,7 @@ public class UserValidator implements Validator {
         User user = (User) o;
         if (!user.getFullName().isEmpty()) {
             String[] splits = user.getFullName().split(" ");
-            if (splits.length >= 3) {
+            if (splits.length >= 2) {
                 if (!Character.isUpperCase(splits[0].codePointAt(0)) ||
                         !Character.isUpperCase(splits[1].codePointAt(0))) {
                     errors.rejectValue("fullName", "", "Each word should start from capital letter");

@@ -1,12 +1,11 @@
 # Library
-This is a simple Spring MVC project that implements CRUD (Create, Read, Update, Delete) operations. 
-It provides a basic web interface to manage a collection of items.
+This is a Spring MVC project that implements CRUD (Create, Read, Update, Delete) operations, validation, pagination
+and other things from Spring/Hibernate/JPA. 
+It provides a basic web interface to manage a library.
 
 ## Prerequisites
 * Make sure you have the following installed:
-
 * Java Development Kit (JDK) version 9 or higher
-
 * Apache Maven
 
 * MySQL Server
@@ -28,10 +27,17 @@ Follow these instructions to get the project up and running on your local machin
 
 ## Usage
 The application provides a simple web interface with the following CRUD functionality:
-* Create: Add a new item to the Database.
+* Create: Add a new user/book to the Database.
 * Read: View the details of an item from Database.
 * Update: Modify the information of an existing item.
 * Delete: Remove an item from the collection.
+* You can assign a book to a user.
+* The book is marked as overdue if the user does not return it to the library within 10 days.
+* You can assign the book to different users, and it can also be available in the library.
+* In the project, book and user validation is implemented.
+* Yes, I can sort books by their publication year.
+* You can sort the books by the year of publication.
+* Additionally, you can find a book by entering its title.
 
 
 ## Technologies Used
@@ -43,6 +49,17 @@ The application provides a simple web interface with the following CRUD function
 * Maven - Build and dependency management tool
 * Tomcat - Web server
 
+## Screenshots 
+## For users: 
+![img1.png](img/img.png)
+![img2.png](img/img_2.png)
+![img3.png](img/img_3.png)
+![img4.png](img/img_4.png)
+## For books:
+![img.png](img/img_5.png)
+![img.png](img/img_6.png)
+![img.png](img/img_7.png)
+![img.png](img/img_8.png)
 ## Contributing
 Contributions are welcome! If you find any issues or would like to add new features, please submit a pull request.
 

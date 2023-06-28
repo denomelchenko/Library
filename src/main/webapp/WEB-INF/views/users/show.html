@@ -16,13 +16,13 @@
 </div>
 <div th:if="${!books.isEmpty()}">
     <div>Books:</div>
-    <ol th:each="book : ${books}">
+    <ul th:each="book : ${books}">
         <li th:style="${book.isExpired()} ? 'color:red' : 'color:black'"
             th:text="'Title: ' +  ${book.getTitle() + ', author: ' + book.getAuthor() + ', year of publication ' + book.getYear()}"></li>
         <div th:if="${book.isExpired() == true}">
             <span style="color:red">BOOK EXPIRED</span>
         </div>
-    </ol>
+    </ul>
 </div>
 <hr/>
 
