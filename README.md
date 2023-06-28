@@ -60,6 +60,7 @@ The application provides a simple web interface with the following CRUD function
 ![img_1.png](img/img_1.png)
 ![img_2.png](img/img_2.png)
 ![img_3.png](img/img_3.png)
+![img.png](img/img_8.png)
 # Contributing
 Contributions are welcome! If you find any issues or would like to add new features, please submit a pull request.
 
