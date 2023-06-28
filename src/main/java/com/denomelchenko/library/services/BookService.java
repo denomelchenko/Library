@@ -9,8 +9,8 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @Transactional(readOnly = true)
@@ -63,6 +63,7 @@ public class BookService {
     public void release(int id) {
         bookRepository.findById(id).ifPresent(book -> {
             book.setOwner(null);
+            book.setWasTakenAt(null);
         });
     }
 
@@ -72,7 +73,10 @@ public class BookService {
 
     @Transactional
     public void assign(int id, User user) {
-        bookRepository.findById(id).ifPresent(book -> book.setOwner(user));
+        bookRepository.findById(id).ifPresent(book -> {
+            book.setOwner(user);
+            book.setWasTakenAt(new Date());
+        });
     }
 
     public List<Book> findByTitleLike(String title) {

@@ -1,20 +1,20 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <title>All books</title>
+    <meta charset="UTF-8">
+    <title>All books</title>
 </head>
 <body>
 <div th:each="book : ${books}">
-  <a th:href="@{/books/{id}(id=${book.getId()})}" th:text="${book.getTitle()}">title</a>
+    <a th:href="@{/books/{id}(id=${book.getId()})}" th:text="${book.getTitle()}">title</a>
 </div>
 <hr/>
 <form th:method="GET" th:action="@{books/new}">
-  <input type="submit" value="CREATE NEW">
+    <input type="submit" value="CREATE NEW">
 </form>
 
 <form th:method="GET" th:action="@{books/search}">
-  <input type="submit" value="SEARCH">
+    <input type="submit" value="SEARCH">
 </form>
 </body>
 </html>

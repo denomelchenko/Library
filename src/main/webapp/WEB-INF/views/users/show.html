@@ -16,14 +16,20 @@
 </div>
 <div th:if="${!books.isEmpty()}">
     <div>Books:</div>
-    <ul th:each="book : ${books}">
-        <li th:text="'Title: ' +  ${book.getTitle() + ' Author: ' + book.getAuthor() + ' year of publication ' + book.getYear()}"></li>
-    </ul>
+    <ol th:each="book : ${books}">
+        <li th:style="${book.isExpired()} ? 'color:red' : 'color:black'"
+            th:text="'Title: ' +  ${book.getTitle() + ', author: ' + book.getAuthor() + ', year of publication ' + book.getYear()}"></li>
+        <div th:if="${book.isExpired() == true}">
+            <span style="color:red">BOOK EXPIRED</span>
+        </div>
+    </ol>
 </div>
 <hr/>
+
 <form th:method="GET" th:action="@{/users/{id}/edit(id=${user.getId()})}">
     <input type="submit" value="EDIT">
 </form>
+
 <form th:method="DELETE" th:action="@{/users/{id}(id=${user.getId()})}">
     <input type="submit" value="DELETE">
 </form>

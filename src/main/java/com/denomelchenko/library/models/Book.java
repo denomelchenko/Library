@@ -2,6 +2,7 @@ package com.denomelchenko.library.models;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
+import java.util.Date;
 
 @Entity
 @Table(name = "Book")
@@ -29,9 +30,16 @@ public class Book {
     @Max(value = 2023, message = "Year should be less than 2023")
     private int year;
 
+    @Column(name = "was_taken_at")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date wasTakenAt;
+
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User owner;
+
+    @Transient
+    private boolean isExpired;
 
     public Book() {
     }
@@ -81,5 +89,21 @@ public class Book {
 
     public void setYear(int year) {
         this.year = year;
+    }
+
+    public Date getWasTakenAt() {
+        return wasTakenAt;
+    }
+
+    public boolean isExpired() {
+        return isExpired;
+    }
+
+    public void setExpired(boolean expired) {
+        isExpired = expired;
+    }
+
+    public void setWasTakenAt(Date wasTakenAt) {
+        this.wasTakenAt = wasTakenAt;
     }
 }
