@@ -3,13 +3,13 @@ This is a Spring MVC project that implements CRUD (Create, Read, Update, Delete)
 and other things from Spring/Hibernate/JPA. 
 It provides a basic web interface to manage a library.
 
-## Prerequisites
+# Prerequisites
 * Make sure you have the following installed:
 * Java Development Kit (JDK) version 9 or higher
 * Apache Maven
 
 * MySQL Server
-## Getting Started
+# Getting Started
 Follow these instructions to get the project up and running on your local machine.
 1. Install Java Development Kit (JDK).
 1. Download the repository to your local machine or clone it by `git clone https://github.com/denomelchenko/Library.git`
@@ -25,7 +25,7 @@ Follow these instructions to get the project up and running on your local machin
   * Navigate to http://localhost:8080/users to access the users panel.
   * Navigate to http://localhost:8080/books to access the books panel
 
-## Usage
+# Usage
 The application provides a simple web interface with the following CRUD functionality:
 * Create: Add a new user/book to the Database.
 * Read: View the details of an item from Database.
@@ -40,7 +40,7 @@ The application provides a simple web interface with the following CRUD function
 * Additionally, you can find a book by entering its title.
 
 
-## Technologies Used
+# Technologies Used
 * Spring MVC - Web framework
 * Hibernate
 * Java Persistence API
@@ -49,19 +49,19 @@ The application provides a simple web interface with the following CRUD function
 * Maven - Build and dependency management tool
 * Tomcat - Web server
 
-## Screenshots 
+# Screenshots 
 ## For users: 
-![img1.png](img/img.png)
-![img2.png](img/img_2.png)
-![img3.png](img/img_3.png)
-![img4.png](img/img_4.png)
-## For books:
-![img.png](img/img_5.png)
-![img.png](img/img_6.png)
-![img.png](img/img_7.png)
-![img.png](img/img_8.png)
-## Contributing
+![img_7.png](img_7.png)
+![img_6.png](img_6.png)
+![img_4.png](img_4.png)
+![img_5.png](img_5.png)
+# For books:
+![img.png](img.png)
+![img_1.png](img_1.png)
+![img_2.png](img_2.png)
+![img_3.png](img_3.png)
+# Contributing
 Contributions are welcome! If you find any issues or would like to add new features, please submit a pull request.
 
-## License
+# License
 This project is licensed under the MIT License. See the LICENSE file for details.
