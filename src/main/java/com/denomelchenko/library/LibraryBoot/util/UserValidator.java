@@ -1,7 +1,7 @@
-package com.denomelchenko.library.util;
+package com.denomelchenko.library.LibraryBoot.util;
 
-import com.denomelchenko.library.models.User;
-import com.denomelchenko.library.services.UserService;
+import com.denomelchenko.library.LibraryBoot.models.User;
+import com.denomelchenko.library.LibraryBoot.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;

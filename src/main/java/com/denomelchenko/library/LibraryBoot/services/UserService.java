@@ -1,8 +1,8 @@
-package com.denomelchenko.library.services;
+package com.denomelchenko.library.LibraryBoot.services;
 
-import com.denomelchenko.library.models.Book;
-import com.denomelchenko.library.models.User;
-import com.denomelchenko.library.repositories.UserRepository;
+import com.denomelchenko.library.LibraryBoot.models.Book;
+import com.denomelchenko.library.LibraryBoot.models.User;
+import com.denomelchenko.library.LibraryBoot.repositories.UserRepository;
 import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

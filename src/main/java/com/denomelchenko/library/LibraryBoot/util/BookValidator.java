@@ -1,6 +1,6 @@
-package com.denomelchenko.library.util;
+package com.denomelchenko.library.LibraryBoot.util;
 
-import com.denomelchenko.library.models.Book;
+import com.denomelchenko.library.LibraryBoot.models.Book;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;

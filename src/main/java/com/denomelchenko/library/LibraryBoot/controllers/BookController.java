@@ -1,17 +1,17 @@
-package com.denomelchenko.library.controllers;
+package com.denomelchenko.library.LibraryBoot.controllers;
 
-import com.denomelchenko.library.models.Book;
-import com.denomelchenko.library.models.User;
-import com.denomelchenko.library.services.BookService;
-import com.denomelchenko.library.services.UserService;
-import com.denomelchenko.library.util.BookValidator;
+import com.denomelchenko.library.LibraryBoot.models.Book;
+import com.denomelchenko.library.LibraryBoot.models.User;
+import com.denomelchenko.library.LibraryBoot.services.BookService;
+import com.denomelchenko.library.LibraryBoot.services.UserService;
+import com.denomelchenko.library.LibraryBoot.util.BookValidator;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 

@@ -1,7 +1,8 @@
-package com.denomelchenko.library.models;
+package com.denomelchenko.library.LibraryBoot.models;
 
-import javax.persistence.*;
-import javax.validation.constraints.*;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
+
 import java.util.Date;
 
 @Entity
@@ -25,7 +26,6 @@ public class Book {
     private String author;
 
     @Column(name = "year")
-    @NotNull(message = NOT_EMPTY_MESSAGE)
     @Min(value = 1250, message = "Year should be bigger than 0")
     @Max(value = 2023, message = "Year should be less than 2023")
     private int year;

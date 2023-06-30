@@ -1,7 +1,7 @@
-package com.denomelchenko.library.models;
+package com.denomelchenko.library.LibraryBoot.models;
 
-import javax.persistence.*;
-import javax.validation.constraints.*;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
 import java.util.List;
 
 @Entity

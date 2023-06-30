@@ -1,15 +1,14 @@
-package com.denomelchenko.library.controllers;
+package com.denomelchenko.library.LibraryBoot.controllers;
 
-import com.denomelchenko.library.models.User;
-import com.denomelchenko.library.services.UserService;
-import com.denomelchenko.library.util.UserValidator;
+import com.denomelchenko.library.LibraryBoot.models.User;
+import com.denomelchenko.library.LibraryBoot.services.UserService;
+import com.denomelchenko.library.LibraryBoot.util.UserValidator;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-
-import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/users")
