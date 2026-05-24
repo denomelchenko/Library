@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{layout :: layout(~{::section}, 'Library Home')}">
+<head>
+    <meta charset="UTF-8">
+    <title>Library Home</title>
+</head>
+<body>
+    <section>
+        <div class="p-5 mb-4 bg-light rounded-3">
+            <div class="container-fluid py-5">
+                <h1 class="display-5 fw-bold">Welcome to Library Management System</h1>
+                <p class="col-md-8 fs-4">Manage your books and users efficiently with our new improved interface.</p>
+                <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+                    <a th:href="@{/books}" class="btn btn-primary btn-lg px-4 me-md-2">Manage Books</a>
+                    <a th:href="@{/users}" class="btn btn-outline-secondary btn-lg px-4">Manage Users</a>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

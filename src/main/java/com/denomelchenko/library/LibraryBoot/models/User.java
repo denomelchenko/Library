@@ -5,7 +5,7 @@ import jakarta.validation.constraints.*;
 import java.util.List;
 
 @Entity
-@Table(name = "User")
+@Table(name = "person")
 public class User {
     private final static String NOT_EMPTY_MESSAGE = "Could not be empty";
 
@@ -21,8 +21,12 @@ public class User {
 
     @Column(name = "year_of_birth")
     @Min(value = 1920, message = "Birth year should be bigger than 1920")
-    @Max(value = 2023, message = "Birth year should be less than 2024")
+    @Max(value = 2025, message = "Birth year should be less than 2026")
     private int yearOfBirth;
+
+    @Column(name = "email")
+    @Email(message = "Email should be valid")
+    private String email;
 
     @OneToMany(mappedBy = "owner")
     private List<Book> books;
@@ -66,5 +70,13 @@ public class User {
 
     public void setYearOfBirth(int yearOfBirth) {
         this.yearOfBirth = yearOfBirth;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

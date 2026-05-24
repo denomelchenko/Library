@@ -9,7 +9,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -75,8 +75,12 @@ public class BookService {
     public void assign(int id, User user) {
         bookRepository.findById(id).ifPresent(book -> {
             book.setOwner(user);
-            book.setWasTakenAt(new Date());
+            book.setWasTakenAt(LocalDateTime.now());
         });
+    }
+
+    public List<Book> search(String query) {
+        return bookRepository.findByTitleContainingIgnoreCaseOrAuthorContainingIgnoreCase(query, query);
     }
 
     public List<Book> findByTitleLike(String title) {

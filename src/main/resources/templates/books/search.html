@@ -1,33 +1,51 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{layout :: layout(~{::section}, 'Search Books')}">
 <head>
     <meta charset="UTF-8">
     <title>Find a book</title>
 </head>
 <body>
-<form th:method="GET" th:action="@{/books/search}" th:object="${book}">
-    <label for="title">Print title:</label>
-    <input type="text" th:field="*{title}" id="title">
-    <input type="submit" value="FIND">
-</form>
-
-<div th:if="${foundBooks}">
-    <div th:each="foundBook : ${foundBooks}">
-        <hr/>
-        <div th:text="${foundBook.getTitle()}"></div>
-        <div th:text="${foundBook.getAuthor()}"></div>
-        <div th:text="${foundBook.getYear()}"></div>
-        <div th:if="${foundBook.getOwner() != null}">
-            <div th:text="${foundBook.getOwner().getFullName()}"></div>
-        </div>
-        <div th:if="${foundBook.getOwner() == null}">
-            <div>Book without user for now</div>
+<section>
+    <div class="card mb-4">
+        <div class="card-body">
+            <form th:method="GET" th:action="@{/books/search}" class="row g-3">
+                <div class="col-md-10">
+                    <label for="query" class="visually-hidden">Search:</label>
+                    <input type="text" name="query" id="query" class="form-control" placeholder="Search by title or author...">
+                </div>
+                <div class="col-md-2">
+                    <input type="submit" class="btn btn-primary w-100" value="FIND">
+                </div>
+            </form>
         </div>
     </div>
-</div>
 
-<div th:if="${empty}">
-    <span th:text="${empty}"></span>
-</div>
+    <div th:if="${foundBooks}">
+        <div class="row row-cols-1 row-cols-md-2 g-4">
+            <div class="col" th:each="foundBook : ${foundBooks}">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title"><a th:href="@{/books/{id}(id=${foundBook.getId()})}" th:text="${foundBook.getTitle()}">Title</a></h5>
+                        <h6 class="card-subtitle mb-2 text-muted" th:text="${foundBook.getAuthor()}">Author</h6>
+                        <p class="card-text">
+                            <strong>Genre:</strong> <span th:text="${foundBook.getGenre()}">Genre</span><br/>
+                            <strong>Year:</strong> <span th:text="${foundBook.getYear()}">Year</span>
+                        </p>
+                        <div th:if="${foundBook.getOwner() != null}">
+                            <span class="badge bg-secondary" th:text="${'Borrowed by: ' + foundBook.getOwner().getFullName()}">Borrowed</span>
+                        </div>
+                        <div th:if="${foundBook.getOwner() == null}">
+                            <span class="badge bg-success">Available</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div th:if="${empty}" class="alert alert-warning mt-4">
+        <span th:text="${empty}"></span>
+    </div>
+</section>
 </body>
 </html>
