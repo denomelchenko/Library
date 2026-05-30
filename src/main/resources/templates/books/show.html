@@ -1,45 +1,58 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{layout :: layout(~{::section}, 'Book Details')}">
 <head>
     <meta charset="UTF-8">
     <title>Book</title>
 </head>
 <body>
-<div>
-    <div th:text="${'Title: ' + book.getTitle()}"></div>
-    <div th:text="${'Author: ' + book.getAuthor()}"></div>
-    <div th:text="${'Year of publication: ' + book.getYear()}"></div>
-</div>
-<hr/>
-<div th:if="${owner}">
-    <span>Book now with: </span>
-    <span th:text="${owner.getFullName()}">Name</span>
-    <form th:method="PATCH" th:action="@{/books/{id}/release(id=${book.getId()})}">
-        <input type="submit" value="RELEASE BOOK">
-    </form>
-</div>
+<section>
+    <div class="card mb-4">
+        <div class="card-body">
+            <h3 class="card-title" th:text="${book.getTitle()}">Title</h3>
+            <p class="card-text"><strong>Author:</strong> <span th:text="${book.getAuthor()}">Author</span></p>
+            <p class="card-text"><strong>Genre:</strong> <span th:text="${book.getGenre()}">Genre</span></p>
+            <p class="card-text"><strong>Year of publication:</strong> <span th:text="${book.getYear()}">Year</span></p>
+        </div>
+    </div>
 
-<div th:if=${empty}>
-    <span th:text="${empty}"></span>
-</div>
+    <div th:if="${owner}" class="alert alert-info">
+        <span>Book now with: </span>
+        <strong th:text="${owner.getFullName()}">Name</strong>
+        <form th:method="PATCH" th:action="@{/books/{id}/release(id=${book.getId()})}" class="mt-2">
+            <input type="submit" class="btn btn-warning" value="RELEASE BOOK">
+        </form>
+    </div>
 
-<div th:if="${users}">
-    <span>This book without user right now. You can assign it:</span>
-    <form th:method="PATCH" th:action="@{/books/{id}/assign(id=${book.getId()})}">
-        <label for="user">User:</label>
-        <select th:object="${user}" th:field="*{id}" id="user">
-            <option th:each="user : ${users}" th:value="${user.getId()}"
-                    th:text="${user.getFullName()}"></option>
-        </select>
-        <input type="submit" value="SET USER"/>
-    </form>
-</div>
-<hr/>
-<form th:method="GET" th:action="@{/books/{id}/edit(id=${book.getId()})}">
-    <input type="submit" value="EDIT">
-</form>
-<form th:method="DELETE" th:action="@{/books/{id}(id=${book.getId()})}">
-    <input type="submit" value="DELETE">
-</form>
+    <div th:if="${empty}" class="alert alert-warning">
+        <span th:text="${empty}"></span>
+    </div>
+
+    <div th:if="${users}" class="card mb-4">
+        <div class="card-body">
+            <h5 class="card-title">This book is currently available. You can assign it:</h5>
+            <form th:method="PATCH" th:action="@{/books/{id}/assign(id=${book.getId()})}" class="row g-3">
+                <div class="col-auto">
+                    <label for="user" class="visually-hidden">User:</label>
+                    <select th:object="${user}" th:field="*{id}" id="user" class="form-select">
+                        <option th:each="user : ${users}" th:value="${user.getId()}"
+                                th:text="${user.getFullName()}"></option>
+                    </select>
+                </div>
+                <div class="col-auto">
+                    <input type="submit" class="btn btn-primary" value="SET USER"/>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="d-flex gap-2">
+        <form th:method="GET" th:action="@{/books/{id}/edit(id=${book.getId()})}">
+            <input type="submit" class="btn btn-secondary" value="EDIT">
+        </form>
+        <form th:method="DELETE" th:action="@{/books/{id}(id=${book.getId()})}">
+            <input type="submit" class="btn btn-danger" value="DELETE">
+        </form>
+    </div>
+</section>
 </body>
 </html>

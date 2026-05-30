@@ -64,14 +64,14 @@ public class BookController {
 
     @GetMapping("/search")
     public String search(@ModelAttribute("book") Book book,
-                         @RequestParam(value = "title", required = false) String title,
+                         @RequestParam(value = "query", required = false) String query,
                          Model model) {
-        if (title != null) {
-            List<Book> foundBooks = bookService.findByTitleLike(title);
+        if (query != null && !query.isEmpty()) {
+            List<Book> foundBooks = bookService.search(query);
             if (!foundBooks.isEmpty()) {
                 model.addAttribute("foundBooks", foundBooks);
             } else {
-                model.addAttribute("empty", "No results were found for the query");
+                model.addAttribute("empty", "No results were found for the query: " + query);
             }
         }
         return "books/search";

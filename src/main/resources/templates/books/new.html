@@ -1,27 +1,47 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{layout :: layout(~{::section}, 'Create Book')}">
 <head>
     <meta charset="UTF-8">
     <title>Create book</title>
 </head>
 <body>
+<section>
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">Create New Book</div>
+                <div class="card-body">
+                    <form th:method="POST" th:action="@{/books}" th:object="${book}">
+                        <div class="mb-3">
+                            <label for="title" class="form-label">Title:</label>
+                            <input type="text" th:field="*{title}" id="title" class="form-control" th:classappend="${#fields.hasErrors('title')} ? 'is-invalid'">
+                            <div class="invalid-feedback" th:if="${#fields.hasErrors('title')}" th:errors="*{title}">Error</div>
+                        </div>
 
-<form th:method="POST" th:action="@{/books}" th:object="${book}">
-    <label for="title">Title:</label>
-    <input type="text" th:field="*{title}" id="title">
-    <div style="color:red" th:if="${#fields.hasErrors('title')}" th:errors="*{title}">Error</div>
-    <br/>
+                        <div class="mb-3">
+                            <label for="author" class="form-label">Author:</label>
+                            <input type="text" th:field="*{author}" id="author" class="form-control" th:classappend="${#fields.hasErrors('author')} ? 'is-invalid'">
+                            <div class="invalid-feedback" th:if="${#fields.hasErrors('author')}" th:errors="*{author}">Error</div>
+                        </div>
 
-    <label for="author">Author:</label>
-    <input type="text" th:field="*{author}" id="author">
-    <div style="color:red" th:if="${#fields.hasErrors('author')}" th:errors="*{author}">Error</div>
-    <br/>
+                        <div class="mb-3">
+                            <label for="genre" class="form-label">Genre:</label>
+                            <input type="text" th:field="*{genre}" id="genre" class="form-control" th:classappend="${#fields.hasErrors('genre')} ? 'is-invalid'">
+                            <div class="invalid-feedback" th:if="${#fields.hasErrors('genre')}" th:errors="*{genre}">Error</div>
+                        </div>
 
-    <label for="year">Year:</label>
-    <input type="text" th:field="*{year}" id="year">
-    <div style="color:red" th:if="${#fields.hasErrors('year')}" th:errors="*{year}">Error</div>
-    <br/>
-    <input type="submit" value="CREATE">
-</form>
+                        <div class="mb-3">
+                            <label for="year" class="form-label">Year:</label>
+                            <input type="text" th:field="*{year}" id="year" class="form-control" th:classappend="${#fields.hasErrors('year')} ? 'is-invalid'">
+                            <div class="invalid-feedback" th:if="${#fields.hasErrors('year')}" th:errors="*{year}">Error</div>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">CREATE</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 </body>
 </html>

@@ -5,11 +5,12 @@ import com.denomelchenko.library.LibraryBoot.models.User;
 import com.denomelchenko.library.LibraryBoot.repositories.UserRepository;
 import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.Collections;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,6 +18,9 @@ import java.util.Optional;
 @Transactional(readOnly = true)
 public class UserService {
     private final UserRepository userRepository;
+
+    @Value("${library.book.expiration-days:10}")
+    private int expirationDays;
 
     @Autowired
     public UserService(UserRepository userRepository) {
@@ -36,7 +40,8 @@ public class UserService {
         if (user.isPresent()) {
             Hibernate.initialize(user.get().getBooks());
             user.get().getBooks().forEach(book -> {
-                if (Math.abs(book.getWasTakenAt().getTime() - new Date().getTime()) > 864000000)
+                if (book.getWasTakenAt() != null &&
+                        book.getWasTakenAt().plusDays(expirationDays).isBefore(LocalDateTime.now()))
                     book.setExpired(true);
             });
             return user.get().getBooks();

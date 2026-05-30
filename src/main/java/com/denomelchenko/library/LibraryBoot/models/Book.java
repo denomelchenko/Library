@@ -3,10 +3,10 @@ package com.denomelchenko.library.LibraryBoot.models;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "Book")
+@Table(name = "book")
 public class Book {
     private final static String NOT_EMPTY_MESSAGE = "Could not be empty";
 
@@ -25,14 +25,16 @@ public class Book {
     @Size(min = 5, max = 100, message = "Should be between 5 and 100 characters")
     private String author;
 
-    @Column(name = "year")
-    @Min(value = 1250, message = "Year should be bigger than 0")
-    @Max(value = 2023, message = "Year should be less than 2023")
+    @Column(name = "genre")
+    private String genre;
+
+    @Column(name = "release_year")
+    @Min(value = 1250, message = "Year should be bigger than 1250")
+    @Max(value = 2025, message = "Year should be less than 2025")
     private int year;
 
     @Column(name = "was_taken_at")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date wasTakenAt;
+    private LocalDateTime wasTakenAt;
 
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id")
@@ -83,6 +85,14 @@ public class Book {
         this.author = author;
     }
 
+    public String getGenre() {
+        return genre;
+    }
+
+    public void setGenre(String genre) {
+        this.genre = genre;
+    }
+
     public int getYear() {
         return year;
     }
@@ -91,7 +101,7 @@ public class Book {
         this.year = year;
     }
 
-    public Date getWasTakenAt() {
+    public LocalDateTime getWasTakenAt() {
         return wasTakenAt;
     }
 
@@ -103,7 +113,7 @@ public class Book {
         isExpired = expired;
     }
 
-    public void setWasTakenAt(Date wasTakenAt) {
+    public void setWasTakenAt(LocalDateTime wasTakenAt) {
         this.wasTakenAt = wasTakenAt;
     }
 }

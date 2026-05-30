@@ -1,37 +1,49 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{layout :: layout(~{::section}, 'User Details')}">
 <head>
     <meta charset="UTF-8">
     <title>User</title>
 </head>
 <body>
-<div>
-    <div th:text="${'Name and surname: ' + user.getFullName()}"></div>
-    <div th:text="${'Year of birth: ' + user.getYearOfBirth()}"></div>
-</div>
-<hr/>
-<div th:if="${books.isEmpty()}">
-    <p>This user without books</p>
-
-</div>
-<div th:if="${!books.isEmpty()}">
-    <div>Books:</div>
-    <ul th:each="book : ${books}">
-        <li th:style="${book.isExpired()} ? 'color:red' : 'color:black'"
-            th:text="'Title: ' +  ${book.getTitle() + ', author: ' + book.getAuthor() + ', year of publication ' + book.getYear()}"></li>
-        <div th:if="${book.isExpired() == true}">
-            <span style="color:red">BOOK EXPIRED</span>
+<section>
+    <div class="card mb-4">
+        <div class="card-body">
+            <h3 class="card-title" th:text="${user.getFullName()}">Name</h3>
+            <p class="card-text"><strong>Email:</strong> <span th:text="${user.getEmail()}">Email</span></p>
+            <p class="card-text"><strong>Year of birth:</strong> <span th:text="${user.getYearOfBirth()}">Year</span></p>
         </div>
-    </ul>
-</div>
-<hr/>
+    </div>
 
-<form th:method="GET" th:action="@{/users/{id}/edit(id=${user.getId()})}">
-    <input type="submit" value="EDIT">
-</form>
+    <div class="card mb-4">
+        <div class="card-header">Borrowed Books</div>
+        <div class="card-body">
+            <div th:if="${books.isEmpty()}">
+                <p class="text-muted">This user has no borrowed books.</p>
+            </div>
+            <div th:if="${!books.isEmpty()}">
+                <ul class="list-group">
+                    <li class="list-group-item" th:each="book : ${books}">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <strong th:text="${book.getTitle()}">Title</strong> by <span th:text="${book.getAuthor()}">Author</span>
+                                (<span th:text="${book.getYear()}">Year</span>)
+                            </div>
+                            <span th:if="${book.isExpired()}" class="badge bg-danger">EXPIRED</span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
 
-<form th:method="DELETE" th:action="@{/users/{id}(id=${user.getId()})}">
-    <input type="submit" value="DELETE">
-</form>
+    <div class="d-flex gap-2">
+        <form th:method="GET" th:action="@{/users/{id}/edit(id=${user.getId()})}">
+            <input type="submit" class="btn btn-secondary" value="EDIT">
+        </form>
+        <form th:method="DELETE" th:action="@{/users/{id}(id=${user.getId()})}">
+            <input type="submit" class="btn btn-danger" value="DELETE">
+        </form>
+    </div>
+</section>
 </body>
 </html>
